@@ -1,0 +1,40 @@
+import csv
+import pathlib
+import pandas as pd
+import os
+import seaborn as sns
+import pandas as pd
+#from sarima import SARIMA_MODEL
+from  preprocessing import predictions
+from  preprocessing_list import predictions_1
+import matplotlib.pyplot as plt
+import pickle
+if __name__ == '__main__':
+    ############# First Example ###########################################################################################################
+# Please  download data from the mentioned links in the PR.                                                                           #
+# Link data : copy and paste the two foldes (data/output)
+#######################################################################################################################################
+    dir_path = pathlib.Path(__file__).parent.parent
+    output = dir_path / "output"
+    path = dir_path / "data" 
+    file_name = "data.csv"
+    df= pd.read_csv(os.path.join(path, file_name))
+    #df_list = df.values.tolist()
+    data=df[:1]
+    X = data.drop('MSRP', axis=1)
+    json_data = X.to_json(orient='records')
+    
+    print(json_data)
+    print(data.info())
+    price_pre = predictions_1(df)
+    
+    out=price_pre.final_model(X)
+    
+    # with open("model.pkl", "wb") as file:
+    #  pickle.dump(out, file)
+    
+    # with open("model.pkl", "rb") as file:
+    #  model = pickle.load(file)
+    # predictions = model.predict(data)
+    # print(predictions)
+    

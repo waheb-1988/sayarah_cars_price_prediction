@@ -17,7 +17,7 @@ output = dir_path / "output"
 path = dir_path / "data" 
 file_name = "data.csv"
 df= pd.read_csv(os.path.join(path, file_name))
-print(df)
+
 @app.route('/predict', methods=['POST'])
 
 @cross_origin()
@@ -25,11 +25,12 @@ print(df)
 def predict():
     data = request.json
     dd = pd.DataFrame(data)
-    pred=predictions_1(df)
+    print("###################")
     print(dd)
     pred=predictions_1(df)
-    mm,cc=pred.preprocess_inputs(dd)
-    ff = pred.final_model(cc)
+    #mm,cc=pred.preprocess_inputs(dd)
+    ff = pred.prrr(dd)
+    
     response = {'predictions': ff}
     return jsonify(response)
 
