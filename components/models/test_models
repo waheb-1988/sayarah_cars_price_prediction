@@ -22,17 +22,17 @@ if __name__ == '__main__':
     dff= pd.read_csv(os.path.join(path, "data_lean.csv"))
     #df_list = df.values.tolist()
     data=dff[:1]
+    print("data")
+    print(data)
     json_data =data.to_json(orient='records')
     import json
     with open('json_data.json', 'w') as f:
         json.dump(json_data, f)
-    print("waheeeeeee")
-    print(json_data)
-    print(data.info())
     price_pre = predictions_1(df)
     model = price_pre.final_model()
     
-    #out=price_pre.final_model(X)
+    out=price_pre.prrr(data)
+    print(out)
     
     with open("model.pkl", "wb") as file:
      pickle.dump(model, file)
