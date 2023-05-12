@@ -68,8 +68,7 @@ class predictions_1 :
                 y,X = self.preprocess_inputs(df)
                 ll=X[:1]
                 kk =ll.to_json(orient='records')
-                print("here")
-                print(kk)
+
                 # Train-test split
                 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, shuffle=True, random_state=1)
                 
@@ -84,7 +83,11 @@ class predictions_1 :
         def final_model (self):
                 df = self.df_list
                 X_train, X_test, y_train, y_test = self.split(df)
-                model=RandomForestRegressor()    
+                model=RandomForestRegressor()  
+                print("X_train") 
+                print(X_train)
+                print("X_train_type",type(X_train)) 
+                print(X_train[:0])
                 model.fit(X_train, y_train)  
                 
                 return model 
