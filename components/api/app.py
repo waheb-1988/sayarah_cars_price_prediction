@@ -1,10 +1,11 @@
 import os
 import sys
+import numpy as np
 from flask_cors import CORS, cross_origin
 parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../../"))
 sys.path.append(parent_dir)
 from flask import Flask, request, jsonify
-from components.models.preprocessing_list import predictions_1
+from components.models.preprocessing import predictions_1
 import pickle 
 import pathlib
 import os  
@@ -16,7 +17,9 @@ dir_path = pathlib.Path(__file__).parent.parent
 output = dir_path / "output"
 path = dir_path / "data" 
 file_name = "data.csv"
-df= pd.read_csv(os.path.join(path, file_name))
+
+with open("model.pkl", "rb") as file:
+   model = pickle.load(file)
 
 @app.route('/predict', methods=['POST'])
 
@@ -24,15 +27,14 @@ df= pd.read_csv(os.path.join(path, file_name))
 
 def predict():
     data = request.json
+    print(data)
     dd = pd.DataFrame(data)
-    print("###################")
+    print("adddd")
     print(dd)
-    pred=predictions_1(df)
-    #mm,cc=pred.preprocess_inputs(dd)
-    ff = pred.prrr(dd)
-    
-    response = {'predictions': ff}
-    return jsonify(response)
+    data_in= predictions_1.(dd)
+    predictions = model.predict(data_in)
+
+    return str(np.round(predictions,2))
 
 if __name__ == '__main__':
     app.run()
