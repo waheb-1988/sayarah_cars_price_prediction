@@ -60,6 +60,7 @@ class predictions_1 :
                     df[column] = df[column].fillna(df[column].mode()[0])
                 
                 # Split df into X and y
+                df.to_csv('data_lean.csv')
                 y = df['MSRP']
                 X = df.drop('MSRP', axis=1)
                 return y,X
@@ -83,32 +84,6 @@ class predictions_1 :
         def final_model (self):
                 df = self.df_list
                 X_train, X_test, y_train, y_test = self.split(df)
-                print(X_train)
-                n_components = 100
-
-                pca = PCA(n_components=n_components)
-                pca.fit(X_train)
-
-                X_train_reduced = pd.DataFrame(pca.transform(X_train), index=X_train.index, columns=["PC" + str(i) for i in range(1, n_components + 1)])
-                X_test_reduced = pd.DataFrame(pca.transform(X_test), index=X_test.index, columns=["PC" + str(i) for i in range(1, n_components + 1)])
-                #models = {
-                        # "                     Linear Regression": LinearRegression(),
-                        # " Linear Regression (L2 Regularization)": Ridge(),
-                        # " Linear Regression (L1 Regularization)": Lasso(),
-                        # "                   K-Nearest Neighbors": KNeighborsRegressor(),
-                        # "                        Neural Network": MLPRegressor(),
-                        # "Support Vector Machine (Linear Kernel)": LinearSVR(),
-                        # "   Support Vector Machine (RBF Kernel)": SVR(),
-                        # "                         Decision Tree": DecisionTreeRegressor(),
-                        #"                         Random Forest": RandomForestRegressor()
-                         # "                     Gradient Boosting": GradientBoostingRegressor()
-                #}
-
-                # for name, model in models.items():
-                #         model.fit(X_train_reduced, y_train)
-                #         print(name + " trained.")
-                # for name, model in models.items():
-                #         print(name + " R^2 Score: {:.5f}".format(model.score(X_test_reduced, y_test)))
                 model=RandomForestRegressor()    
                 model.fit(X_train, y_train)  
                 
