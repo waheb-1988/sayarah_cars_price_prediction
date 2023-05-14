@@ -36,8 +36,10 @@ def predict():
     random_number = random.randint(1, 1000) 
     dd=dff.iloc[[random_number]]
     predictions = model.predict(dd)
-
-    return str(np.round(predictions,2))
+    result =  {"predictions" : str(np.round(predictions,2)),
+               "status" : "ok",
+                "response" : data}
+    return result
 
 if __name__ == '__main__':
     app.run()

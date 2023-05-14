@@ -13,7 +13,7 @@ from sklearn.neural_network import MLPRegressor
 from sklearn.svm import LinearSVR, SVR
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-
+from sklearn.pipeline import make_pipeline
 class predictions_1 :
         def __init__(self, df_list):
             self.df_list = df_list
@@ -89,11 +89,12 @@ class predictions_1 :
                 print("X_train_type",type(X_train)) 
                 print(X_train[:0])
                 model.fit(X_train, y_train)  
-                
+
                 return model 
         def prrr(self,data):
                 model = self.final_model()
                 pred= model.predict(data)
                 return pred
+        
         
                         
