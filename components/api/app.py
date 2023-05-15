@@ -35,8 +35,8 @@ def predict():
     data = request.json
     random_number = random.randint(1, 1000) 
     dd=dff.iloc[[random_number]]
-    predictions = model.predict(dd)
-    result =  {"predictions" : str(np.round(predictions,2)),
+    predictions = int(model.predict(dd))
+    result =  {"predictions" : str(np.round(predictions,0)),
                "status" : "ok",
                 "response" : data}
     return result
