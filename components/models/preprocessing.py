@@ -79,7 +79,7 @@ class predictions :
 
                 pca = PCA(n_components=n_components)
                 pca.fit(X_train)
-
+                
                 X_train_reduced = pd.DataFrame(pca.transform(X_train), index=X_train.index, columns=["PC" + str(i) for i in range(1, n_components + 1)])
                 X_test_reduced = pd.DataFrame(pca.transform(X_test), index=X_test.index, columns=["PC" + str(i) for i in range(1, n_components + 1)])
                 models = {
